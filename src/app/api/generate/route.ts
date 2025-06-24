@@ -36,10 +36,11 @@ export async function POST(req: NextRequest) {
   }
 
   // Build prompt
-  let prompt = `Generate ${safeNumber} funny, absurd and ridiculous achievements in the format:\n"${safeName} unlocked: [ACHIEVEMENT NAME] — [DESCRIPTION]"\nMake the achievements themed around "${safeCategory}" and tailored to the selected absurdity level: "${safeAbsurdity}".\nMake them creative, funny, and shareable. Do not use markdown or asterisks for bold. Output in plain text only.`;
+  let prompt = "";
   if (languagePrompt && language !== 'en') {
-    prompt += ` Respond in ${languagePrompt}.`;
+    prompt += `ALL OUTPUT MUST BE IN ${languagePrompt.toUpperCase()}.\n`;
   }
+  prompt += `Generate ${safeNumber} funny, absurd and ridiculous achievements in the format:\n"${safeName} unlocked: [ACHIEVEMENT NAME] — [DESCRIPTION]"\nMake the achievements themed around "${safeCategory}" and tailored to the selected absurdity level: "${safeAbsurdity}".\nMake them creative, funny, and shareable. Do not use markdown or asterisks for bold. Output in plain text only.`;
 
   // Call Gemini API
   const apiKey = process.env.GEMINI_API_KEY;
