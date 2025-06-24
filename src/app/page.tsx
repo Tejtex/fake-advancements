@@ -4,6 +4,20 @@ import { Geist } from "next/font/google";
 
 const ABSURDITY_LEVELS = ["Low", "Medium", "High"];
 
+const LANGUAGE_OPTIONS = [
+  { code: "en", label: "English" },
+  { code: "es", label: "Spanish" },
+  { code: "fr", label: "French" },
+  { code: "de", label: "German" },
+  { code: "it", label: "Italian" },
+  { code: "pt", label: "Portuguese" },
+  { code: "ru", label: "Russian" },
+  { code: "zh", label: "Chinese" },
+  { code: "ja", label: "Japanese" },
+  { code: "ar", label: "Arabic" },
+  { code: "pl", label: "Polish" },
+];
+
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
 
 function sanitize(input: string, maxLen = 64) {
@@ -14,6 +28,7 @@ export default function Home() {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [absurdity, setAbsurdity] = useState("Medium");
+  const [language, setLanguage] = useState("en");
   const [achievements, setAchievements] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -58,6 +73,7 @@ export default function Home() {
           category: safeCategory,
           number: 1, // Always generate one achievement
           absurdity,
+          language,
         }),
       });
       const data = await res.json();
@@ -133,6 +149,18 @@ export default function Home() {
                 >
                   {ABSURDITY_LEVELS.map(level => (
                     <option key={level} value={level}>{level}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex items-center gap-2">
+                <label className="text-gray-700 dark:text-gray-200 font-medium">Language:</label>
+                <select
+                  value={language}
+                  onChange={e => setLanguage(e.target.value)}
+                  className="rounded-full border border-gray-300 dark:border-gray-700 px-4 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-800 dark:text-white shadow-sm transition-all"
+                >
+                  {LANGUAGE_OPTIONS.map(opt => (
+                    <option key={opt.code} value={opt.code}>{opt.label}</option>
                   ))}
                 </select>
               </div>
