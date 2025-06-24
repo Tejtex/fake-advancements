@@ -13,7 +13,6 @@ function sanitize(input: string, maxLen = 64) {
 export default function Home() {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
-  const [number, setNumber] = useState(5);
   const [absurdity, setAbsurdity] = useState("Medium");
   const [achievements, setAchievements] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
@@ -64,17 +63,15 @@ export default function Home() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Unknown error");
       setAchievements(data.achievements || []);
-    } catch (err: any) {
-      setError(err.message || "Failed to generate achievements.");
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Failed to generate achievements.");
+      }
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleClear = () => {
-    setAchievements([]);
-    setError("");
-    setCopiedIdx(null);
   };
 
   const handleCopy = async (idx: number) => {

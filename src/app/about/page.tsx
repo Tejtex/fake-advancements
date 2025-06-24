@@ -6,7 +6,7 @@ export default function About() {
       <div className="w-full max-w-xl bg-white/80 dark:bg-gray-900/80 rounded-xl shadow-lg p-8 flex flex-col gap-6">
         <h1 className="text-3xl font-bold mb-2 text-center">About Fake Achievement Generator</h1>
         <p className="text-gray-700 dark:text-gray-200 text-lg text-center">
-          The <span className="font-semibold">Fake Achievement Generator</span> lets you create hilarious, absurd, and creative achievements for any name and category. Powered by Google Gemini AI, it's perfect for sharing laughs with friends, spicing up your gaming sessions, or just having fun!
+          The <span className="font-semibold">Fake Achievement Generator</span> lets you create hilarious, absurd, and creative achievements for any name and category. Powered by Google Gemini AI, it&apos;s perfect for sharing laughs with friends, spicing up your gaming sessions, or just having fun!
         </p>
         <div className="border-t border-gray-300 dark:border-gray-700 pt-4">
           <h2 className="text-xl font-semibold mb-1">Contact</h2>

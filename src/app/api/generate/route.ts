@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
       .map((line: string) => line.trim())
       .filter((line: string) => line && line.includes('unlocked:'));
     return NextResponse.json({ achievements });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Failed to generate achievements' }, { status: 500 });
   }
 } 
