@@ -5,17 +5,17 @@ import { Geist } from "next/font/google";
 const ABSURDITY_LEVELS = ["Low", "Medium", "High"];
 
 const LANGUAGE_OPTIONS = [
-  { code: "en", label: "English" },
-  { code: "es", label: "Spanish" },
-  { code: "fr", label: "French" },
-  { code: "de", label: "German" },
-  { code: "it", label: "Italian" },
-  { code: "pt", label: "Portuguese" },
-  { code: "ru", label: "Russian" },
-  { code: "zh", label: "Chinese" },
-  { code: "ja", label: "Japanese" },
-  { code: "ar", label: "Arabic" },
-  { code: "pl", label: "Polish" },
+  { code: "en", label: "English", prompt: "English" },
+  { code: "es", label: "Spanish", prompt: "Spanish" },
+  { code: "fr", label: "French", prompt: "French" },
+  { code: "de", label: "German", prompt: "German" },
+  { code: "it", label: "Italian", prompt: "Italian" },
+  { code: "pt", label: "Portuguese", prompt: "Portuguese" },
+  { code: "ru", label: "Russian", prompt: "Russian" },
+  { code: "zh", label: "Chinese", prompt: "Chinese" },
+  { code: "ja", label: "Japanese", prompt: "Japanese" },
+  { code: "ar", label: "Arabic", prompt: "Arabic" },
+  { code: "pl", label: "Polish", prompt: "Polish" },
 ];
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
@@ -73,7 +73,8 @@ export default function Home() {
           category: safeCategory,
           number: 1, // Always generate one achievement
           absurdity,
-          language,
+          language: language,
+          languagePrompt: LANGUAGE_OPTIONS.find(opt => opt.code === language)?.prompt || "English",
         }),
       });
       const data = await res.json();

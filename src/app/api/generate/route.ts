@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     rateLimitMap.set(ip, { count: rl.count + 1, last: rl.last });
   }
 
-  const { name, category, number, absurdity, language } = await req.json();
+  const { name, category, number, absurdity, language, languagePrompt } = await req.json();
   // Validate and sanitize inputs
   const safeName = sanitize(String(name), 32);
   const safeCategory = sanitize(String(category), 32);
@@ -37,8 +37,8 @@ export async function POST(req: NextRequest) {
 
   // Build prompt
   let prompt = `Generate ${safeNumber} funny, absurd and ridiculous achievements in the format:\n"${safeName} unlocked: [ACHIEVEMENT NAME] — [DESCRIPTION]"\nMake the achievements themed around "${safeCategory}" and tailored to the selected absurdity level: "${safeAbsurdity}".\nMake them creative, funny, and shareable. Do not use markdown or asterisks for bold. Output in plain text only.`;
-  if (language && language !== 'en') {
-    prompt += ` Respond in ${language} language.`;
+  if (languagePrompt && language !== 'en') {
+    prompt += ` Respond in ${languagePrompt}.`;
   }
 
   // Call Gemini API
